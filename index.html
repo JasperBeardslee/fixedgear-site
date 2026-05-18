@@ -1,22 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Fixed Gear Ratio Calculator</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<meta charset="UTF-8">
+<title>Fixed Gear Ratio Calculator</title>
 
-<h1>Fixed Gear Ratio Calculator</h1>
+<style>
+  body {
+    margin: 0;
+    background: #0d0d0d;
+    color: #f5f5f5;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+  }
 
-<div id="gearTable"></div>
+  h1 {
+    font-size: 36px;
+    margin-bottom: 30px;
+  }
 
-<div id="output">
-  <p>Selected: <span id="selection">None</span></p>
-  <p>Ratio: <span id="ratio"></span></p>
-  <p>Skid patches: <span id="skid"></span></p>
-</div>
+  .table-wrapper {
+    display: flex;
+    align-items: center;
+  }
 
-<script src="script.js"></script>
-</body>
-</html>
+  .y-label {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    margin-right: 10px;
+    color: #aaa;
