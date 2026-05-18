@@ -1,31 +1,147 @@
-body {
-  font-family: Arial, sans-serif;
+:root{
+  --bg: #0d0d0d;
+  --panel: #111;
+  --text: #f5f5f5;
+  --muted: #a7a7a7;
+
+  /* light purple accent */
+  --accent: #b794f4;
+  --accentDim: rgba(183, 148, 244, 0.25);
+  --gridLine: rgba(183, 148, 244, 0.18);
+
+  --cell: 52px;
+  --radius: 14px;
 }
 
-#gearTable {
+*{ box-sizing: border-box; }
+
+body{
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at top, #151515 0%, var(--bg) 55%);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   display: grid;
-  gap: 2px;
+  place-items: center;
 }
 
-.row {
+.container{
+  width: min(980px, 92vw);
   display: grid;
-  grid-template-columns: repeat(14, 1fr);
+  justify-items: center;
+  gap: 16px;
+  padding: 36px 0 48px;
 }
 
-.cell {
-  border: 1px solid #ccc;
-  padding: 8px;
-  text-align: center;
+h1{
+  margin: 0 0 6px;
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.x-axis-title{
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.table-area{
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+.y-axis-title{
+  color: var(--muted);
+  font-size: 14px;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  user-select: none;
+}
+
+.gear-grid{
+  display: grid;
+  grid-template-columns: var(--cell) repeat(14, var(--cell));
+  border: 2px solid var(--accent);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(183,148,244,0.15), 0 18px 50px rgba(0,0,0,0.5);
+}
+
+.cell{
+  width: var(--cell);
+  height: var(--cell);
+  display: grid;
+  place-items: center;
+  font-size: 16px;           /* same for axis + values */
+  border-right: 1px solid var(--gridLine);
+  border-bottom: 1px solid var(--gridLine);
+  user-select: none;
+}
+
+/* top-left corner */
+.corner{
+  background: rgba(255,255,255,0.02);
+  color: transparent;
+}
+
+/* axis number cells */
+.axis{
+  background: rgba(255,255,255,0.03);
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* ratio cells */
+.ratio{
+  background: rgba(255,255,255,0.02);
   cursor: pointer;
-  background: #f9f9f9;
+  transition: transform 120ms ease, background 120ms ease, color 120ms ease;
 }
 
-.cell:hover {
-  background: #cce5ff;
+.ratio:hover{
+  background: rgba(31,111,235,0.55);
+  transform: scale(1.03);
 }
 
-.active {
-  background: #007bff;
-  color: white;
+/* hover highlight for whole row+col */
+.hoverHL{
+  background: var(--accentDim) !important;
 }
-``
+
+/* selected cell */
+.selected{
+  background: rgba(46, 160, 67, 0.85) !important;
+  color: #fff;
+}
+
+/* info panel */
+.info{
+  margin-top: 18px;
+  width: min(520px, 92vw);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(183,148,244,0.25);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  text-align: center;
+}
+
+.setup{
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.metric{
+  font-size: 18px;
+  margin: 4px 0;
+}
+
+.hoverHint{
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--muted);
+  min-height: 18px; /* prevents layout jump */
+}
