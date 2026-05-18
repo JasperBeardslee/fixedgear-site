@@ -1,9 +1,7 @@
 :root{
   --bg:#0b0b10;
-  --table-bg:#1a1a22;
-  --purple:#b794f4;
-  --grid:rgba(183,148,244,0.25);
-  --hover:rgba(183,148,244,0.18);
+  --table:#1c1c26;
+  --hover:rgba(183,148,244,0.18);  --purple:#b794f4;
   --orange:#f6ad55;
   --cell:44px;
 }
@@ -15,57 +13,19 @@ body{
   color:#f5f5f5;
   font-family:-apple-system, BlinkMacSystemFont, sans-serif;
   display:flex;
-  justify-content:center;
-}
-
-main{
-  width:1000px;
-  padding:30px 0;
-  text-align:center;
+  flex-direction:column;
+  align-items:center;
 }
 
 h1{
   color:var(--orange);
-  font-size:48px; /* bigger title */
-  margin-bottom:30px;
-}
-
-/* MENU */
-.menu-button{
-  position:fixed;
-  top:20px;
-  left:20px;
-  font-size:28px;
-  cursor:pointer;
-  color:var(--orange);
-}
-
-.menu{
-  position:fixed;
-  top:60px;
-  left:20px;
-  background:#12121a;
-  border:1px solid var(--purple);
-  border-radius:8px;
-  padding:10px;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
-.menu a{
-  color:#fff;
-  text-decoration:none;
-}
-
-.hidden{
-  display:none;
+  font-size:48px;
+  margin:30px 0;
 }
 
 /* LAYOUT */
 .layout{
   display:flex;
-  justify-content:center;
   align-items:center;
   gap:40px;
 }
@@ -74,7 +34,8 @@ h1{
 .x-label{
   font-size:18px;
   font-weight:bold;
-  margin-bottom:4px;
+  margin-bottom:6px;
+  text-align:center;
 }
 
 .y-label{
@@ -82,9 +43,10 @@ h1{
   transform:rotate(180deg);
   font-size:18px;
   font-weight:bold;
-  margin-right:4px;
+  margin-right:6px;
 }
 
+/* TABLE STRUCTURE */
 .table-wrap{
   display:flex;
   align-items:center;
@@ -99,11 +61,10 @@ h1{
   display:flex;
 }
 
-/* X AXIS FIXED CENTERING */
+/* X AXIS FIX */
 .x-axis{
   display:grid;
   grid-template-columns: var(--cell) repeat(14, var(--cell));
-  justify-content:center;
 }
 
 /* AXIS */
@@ -115,9 +76,9 @@ h1{
   align-items:center;
 }
 
-/* TABLE BACKGROUND */
+/* MATRIX */
 .matrix{
-  background:var(--table-bg); /* ✅ dark grey */
+  background:var(--table);
   display:grid;
   grid-template-columns:repeat(14, var(--cell));
   border:2px solid var(--purple);
@@ -129,19 +90,18 @@ h1{
   width:var(--cell);
   height:var(--cell);
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   border-right:1px solid var(--grid);
   border-bottom:1px solid var(--grid);
   cursor:pointer;
 }
 
-/* hover */
+/* INTERACTION */
 .hover{
   background:var(--hover);
 }
 
-/* selected */
 .selected{
   background:var(--orange);
   color:#111;
@@ -149,13 +109,14 @@ h1{
 
 /* OUTPUT */
 .output{
+  width:220px;
+  padding:20px;
   border:2px solid var(--purple);
   border-radius:10px;
-  padding:20px;
-  width:220px;
 }
 
 .selection{
   font-size:20px;
   font-weight:bold;
 }
+  --grid:rgba(183,148,244,0.25);
