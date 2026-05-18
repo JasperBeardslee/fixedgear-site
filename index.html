@@ -1,175 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Fixed Gear Ratio Calculator</title>
-
-<style>
-  body {
-    margin: 0;
-    background: #0d0d0d;
-    color: #f5f5f5;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    flex-direction: column;
-  }
-
-  h1 {
-    font-size: 36px;
-    margin-bottom: 30px;
-  }
-
-  .table-wrapper {
-    display: flex;
-    align-items: center;
-  }
-
-  .y-label {
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    margin-right: 10px;
-    color: #aaa;
-    font-size: 14px;
-  }
-
-  #gearTable {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .header-row {
-    display: grid;
-    grid-template-columns: repeat(14, 50px);
-    margin-bottom: 5px;
-    text-align: center;
-    color: #aaa;
-    font-size: 12px;
-  }
-
-  .row {
-    display: grid;
-    grid-template-columns: repeat(14, 50px);
-  }
-
-  .cell, .header-cell {
-    border: 1px solid #222;
-    padding: 10px;
-    text-align: center;
-  }
-
-  .cell {
-    background: #111;
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-
-  .cell:hover {
-    background: #1f6feb;
-    color: white;
-    transform: scale(1.05);
-  }
-
-  .active {
-    background: #2ea043 !important;
-  }
-
-  .info-box {
-    margin-top: 30px;
-    background: #111;
-    padding: 20px 30px;
-    border: 1px solid #222;
-    text-align: center;
-    min-width: 300px;
-  }
-
-  .info-box p {
-    margin: 5px 0;
-    font-size: 18px;
-  }
-
-  .label {
-    margin-top: 10px;
-    text-align: center;
-    color: #aaa;
-    font-size: 14px;
-  }
-
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fixed Gear Ratio Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
 </head>
 
 <body>
+  <main class="container">
+    <h1>Fixed Gear Ratio Calculator</h1>
 
-<h1>Fixed Gear Ratio Calculator</h1>
+    <div class="x-axis-title">Chainring Teeth</div>
 
-<div class="label">Chainring Teeth</div>
+    <div class="table-area">
+      <div class="y-axis-title">Cog Teeth</div>
+      <div id="gearGrid" class="gear-grid" aria-label="Fixed gear ratio table"></div>
+    </div>
 
-<div class="table-wrapper">
-  <div class="y-label">Cog Teeth</div>
-  <div id="gearTable"></div>
-</div>
-
-<div class="info-box">
-  <p id="selection">Hover a ratio</p>
-  <p id="ratio"></p>
-  <p id="skid"></p>
-</div>
-
-<script>
-const chainrings = [42,43,44,45,46,47,48,49,50,51,52,53,54,55];
-const cogs = [13,14,15,16,17,18,19,20,21,22,23];
-
-const table = document.getElementById("gearTable");
-
-function gcd(a, b) {
-  return b === 0 ? a : gcd(b, a % b);
-}
-
-/* Header row */
-const headerRow = document.createElement("div");
-headerRow.className = "header-row";
-
-chainrings.forEach(c => {
-  const cell = document.createElement("div");
-  cell.className = "header-cell";
-  cell.textContent = c;
-  headerRow.appendChild(cell);
-});
-
-table.appendChild(headerRow);
-
-/* Table body */
-cogs.forEach(cog => {
-  const row = document.createElement("div");
-  row.className = "row";
-
-  chainrings.forEach(chainring => {
-    let ratio = (chainring / cog).toFixed(2);
-    let skid = cog / gcd(chainring, cog);
-
-    const cell = document.createElement("div");
-    cell.className = "cell";
-    cell.textContent = ratio;
-
-    cell.addEventListener("mouseenter", () => {
-      document.getElementById("selection").textContent = `${chainring} × ${cog}`;
-      document.getElementById("ratio").textContent = `Ratio: ${ratio}`;
-      document.getElementById("skid").textContent = `Skid patches: ${skid}`;
-    });
-
-    cell.addEventListener("click", () => {
-      document.querySelectorAll(".cell").forEach(c => c.classList.remove("active"));
-      cell.classList.add("active");
-    });
-
-    row.appendChild(cell);
-  });
-
-  table.appendChild(row);
-});
-</script>
-
+    <section class="info">
+      <div class="setup" id="setup">Click a ratio</div>
+      <div class="metric" id="metricRatio"></div>
+      <div class="metric" id="metricSkid"></div>
+      <div class="hoverHint" id="hoverHint"></div>
+    </section>
+  </main>
 </body>
 </html>
