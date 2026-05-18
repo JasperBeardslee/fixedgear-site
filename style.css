@@ -1,147 +1,200 @@
 :root{
-  --bg: #0d0d0d;
-  --panel: #111;
-  --text: #f5f5f5;
-  --muted: #a7a7a7;
+  --bg:#0b0b0f;
+  --text:#f4f4f7;
 
-  /* light purple accent */
-  --accent: #b794f4;
-  --accentDim: rgba(183, 148, 244, 0.25);
-  --gridLine: rgba(183, 148, 244, 0.18);
+  /* Purple */
+  --purple:#b794f4;
+  --purpleGrid:rgba(183,148,244,0.35);
+  --purpleSoft:rgba(183,148,244,0.18);
 
-  --cell: 52px;
-  --radius: 14px;
+  /* Hover + Selected */
+  --hoverBlue:rgba(31,111,235,0.55);
+  --selectedOrange:rgba(246,173,85,0.90); /* light orange */
+
+  --cell:52px;
+  --radius:14px;
 }
 
-*{ box-sizing: border-box; }
+*{ box-sizing:border-box; }
 
 body{
-  margin: 0;
-  min-height: 100vh;
-  background: radial-gradient(ellipse at top, #151515 0%, var(--bg) 55%);
-  color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  display: grid;
-  place-items: center;
+  margin:0;
+  min-height:100vh;
+  background:radial-gradient(ellipse at top, #141422 0%, var(--bg) 60%);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  display:grid;
+  place-items:center;
 }
 
-.container{
-  width: min(980px, 92vw);
-  display: grid;
-  justify-items: center;
-  gap: 16px;
-  padding: 36px 0 48px;
+.page{
+  width:min(1100px, 92vw);
+  padding:34px 0 46px;
 }
 
 h1{
-  margin: 0 0 6px;
-  font-size: 40px;
-  font-weight: 800;
-  letter-spacing: 0.2px;
+  margin:0 0 18px;
+  font-size:44px;
+  font-weight:800;
+  letter-spacing:0.2px;
+  text-align:center;
 }
 
-.x-axis-title{
-  color: var(--muted);
-  font-size: 14px;
-  margin-top: 4px;
+/* Two-column layout: table left, info right */
+.layout{
+  display:grid;
+  grid-template-columns: 1fr 340px;
+  gap:28px;
+  align-items:start;
+  justify-content:center;
 }
 
-.table-area{
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 10px;
-  align-items: center;
+/* keep things nice on mobile */
+@media (max-width: 900px){
+  .layout{ grid-template-columns: 1fr; }
+  .info{ justify-self:center; width:min(520px, 100%); }
 }
 
-.y-axis-title{
-  color: var(--muted);
-  font-size: 14px;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  user-select: none;
+.tableBlock{
+  justify-self:end; /* nudges table a bit left relative to whole page */
 }
 
-.gear-grid{
-  display: grid;
-  grid-template-columns: var(--cell) repeat(14, var(--cell));
-  border: 2px solid var(--accent);
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: 0 0 0 1px rgba(183,148,244,0.15), 0 18px 50px rgba(0,0,0,0.5);
+.xTitle{
+  text-align:center;
+  font-size:14px;
+  margin-bottom:10px;
+  opacity:0.9;
 }
 
-.cell{
-  width: var(--cell);
-  height: var(--cell);
-  display: grid;
-  place-items: center;
-  font-size: 16px;           /* same for axis + values */
-  border-right: 1px solid var(--gridLine);
-  border-bottom: 1px solid var(--gridLine);
-  user-select: none;
+.tableWrap{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  justify-content:center;
 }
 
-/* top-left corner */
+.yTitle{
+  writing-mode:vertical-rl;
+  transform:rotate(180deg);
+  font-size:14px;
+  opacity:0.9;
+  user-select:none;
+}
+
+/* Table shell (no border here; border only on matrix) */
+.tableShell{
+  display:grid;
+  gap:10px;
+}
+
+.topRow{
+  display:grid;
+  grid-template-columns: var(--cell) auto;
+  gap:0;
+  align-items:end;
+}
+
+.bodyRow{
+  display:grid;
+  grid-template-columns: var(--cell) auto;
+  gap:0;
+}
+
+/* Axis grids */
+.xAxis{
+  display:grid;
+  grid-template-columns: repeat(14, var(--cell));
+}
+
+.yAxis{
+  display:grid;
+  grid-template-rows: repeat(12, var(--cell)); /* matches cogs array length in JS */
+}
+
+/* Axis + corner cells */
 .corner{
-  background: rgba(255,255,255,0.02);
-  color: transparent;
+  width:var(--cell);
+  height:var(--cell);
 }
 
-/* axis number cells */
-.axis{
-  background: rgba(255,255,255,0.03);
-  color: var(--text);
-  font-weight: 600;
+.axisCell{
+  width:var(--cell);
+  height:var(--cell);
+  display:grid;
+  place-items:center;
+  font-size:16px;     /* same size as ratio cells */
+  color:var(--text);  /* same color as ratio cells */
+  background:rgba(255,255,255,0.02);
 }
 
-/* ratio cells */
-.ratio{
-  background: rgba(255,255,255,0.02);
-  cursor: pointer;
-  transition: transform 120ms ease, background 120ms ease, color 120ms ease;
+/* Ratio matrix ONLY gets purple outline */
+.matrix{
+  display:grid;
+  grid-template-columns: repeat(14, var(--cell));
+  grid-template-rows: repeat(12, var(--cell));
+  border:2px solid var(--purple);
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:
+    0 0 0 1px rgba(183,148,244,0.15),
+    0 18px 50px rgba(0,0,0,0.55);
 }
 
-.ratio:hover{
-  background: rgba(31,111,235,0.55);
-  transform: scale(1.03);
+.mcell{
+  width:var(--cell);
+  height:var(--cell);
+  display:grid;
+  place-items:center;
+  font-size:16px;
+  color:var(--text);
+  background:rgba(255,255,255,0.02);
+  cursor:pointer;
+  border-right:1px solid var(--purpleGrid);  /* inner gridlines = lighter purple */
+  border-bottom:1px solid var(--purpleGrid);
+  transition:transform 120ms ease, background 120ms ease;
 }
 
-/* hover highlight for whole row+col */
+.mcell:hover{
+  background:var(--hoverBlue);
+  transform:scale(1.03);
+}
+
+/* row+col hover highlight (subtle purple) */
 .hoverHL{
-  background: var(--accentDim) !important;
+  background:var(--purpleSoft) !important;
 }
 
-/* selected cell */
+/* selected = light orange */
 .selected{
-  background: rgba(46, 160, 67, 0.85) !important;
-  color: #fff;
+  background:var(--selectedOrange) !important;
+  color:#111;
 }
 
-/* info panel */
+/* Output box */
 .info{
-  margin-top: 18px;
-  width: min(520px, 92vw);
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(183,148,244,0.25);
-  border-radius: var(--radius);
-  padding: 18px 22px;
-  text-align: center;
+  justify-self:start;
+  border:2px solid var(--purple);
+  border-radius:var(--radius);
+  padding:18px 22px;
+  background:rgba(255,255,255,0.03);
+  text-align:center;
 }
 
 .setup{
-  font-size: 20px;
-  font-weight: 800;
-  margin-bottom: 6px;
+  font-size:22px;
+  font-weight:800;
+  margin-bottom:8px;
 }
 
 .metric{
-  font-size: 18px;
-  margin: 4px 0;
+  font-size:18px;
+  margin:6px 0;
 }
 
-.hoverHint{
-  margin-top: 10px;
-  font-size: 14px;
-  color: var(--muted);
-  min-height: 18px; /* prevents layout jump */
+.hint{
+  margin-top:10px;
+  font-size:14px;
+  opacity:0.85;
+  min-height:18px;
 }
+``
