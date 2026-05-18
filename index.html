@@ -7,42 +7,55 @@
 </head>
 
 <body>
-  <main>
-    <h1>Fixed Gear Ratio Calculator</h1>
 
-    <div class="layout">
+<!-- MENU BUTTON -->
+<div class="menu-button" onclick="toggleMenu()">
+  ☰
+</div>
 
-      <!-- TABLE -->
-      <div class="table-container">
+<!-- DROPDOWN MENU -->
+<div id="menu" class="menu hidden">
+  <a href="#">Calculator Home</a>
+  <a href="#">Fixed Gear Resources</a>
+  <a href="#">Blog</a>
+</div>
 
-        <div class="x-label">Chainring Teeth</div>
+<main>
+  <h1>Fixed Gear Ratio Calculator</h1>
 
-        <div class="table-wrap">
-          <div class="y-label">Cog Teeth</div>
+  <div class="layout">
 
-          <div class="table-core">
+    <!-- TABLE -->
+    <div class="table-container">
 
-            <div id="xAxis" class="x-axis"></div>
+      <div class="x-label">Chainring Teeth</div>
 
-            <div class="body">
-              <div id="yAxis" class="y-axis"></div>
-              <div id="matrix" class="matrix"></div>
-            </div>
+      <div class="table-wrap">
+        <div class="y-label">Cog Teeth</div>
 
+        <div class="table-core">
+
+          <div id="xAxis" class="x-axis"></div>
+
+          <div class="body">
+            <div id="yAxis"></div>
+            <div id="matrix" class="matrix"></div>
           </div>
+
         </div>
       </div>
-
-      <!-- OUTPUT -->
-      <div class="output">
-        <p class="selection">Click a ratio</p>
-        <p id="ratio"></p>
-        <p id="skid"></p>
-      </div>
-
     </div>
-  </main>
 
-  <script src="script.js"></script>
+    <!-- OUTPUT -->
+    <div class="output">
+      <p class="selection">Click a ratio</p>
+      <p id="ratio"></p>
+      <p id="skid"></p>
+    </div>
+
+  </div>
+</main>
+
+<script src="script.js"></script>
 </body>
 </html>
