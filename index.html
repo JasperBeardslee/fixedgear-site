@@ -2,29 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Fixed Gear Ratio Calculator</title>
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
 </head>
 
 <body>
-  <main class="container">
+  <main class="page">
     <h1>Fixed Gear Ratio Calculator</h1>
 
-    <div class="x-axis-title">Chainring Teeth</div>
+    <section class="layout">
+      <!-- LEFT: TABLE -->
+      <div class="tableBlock">
+        <div class="xTitle">Chainring Teeth</div>
 
-    <div class="table-area">
-      <div class="y-axis-title">Cog Teeth</div>
-      <div id="gearGrid" class="gear-grid" aria-label="Fixed gear ratio table"></div>
-    </div>
+        <div class="tableWrap">
+          <div class="yTitle">Cog Teeth</div>
 
-    <section class="info">
-      <div class="setup" id="setup">Click a ratio</div>
-      <div class="metric" id="metricRatio"></div>
-      <div class="metric" id="metricSkid"></div>
-      <div class="hoverHint" id="hoverHint"></div>
+          <div class="tableShell">
+            <div class="topRow">
+              <div class="corner"></div>
+              <div id="xAxis" class="xAxis"></div>
+            </div>
+
+            <div class="bodyRow">
+              <div id="yAxis" class="yAxis"></div>
+              <div id="matrix" class="matrix" aria-label="ratio matrix"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: OUTPUT -->
+      <aside class="info">
+        <div class="setup" id="setup">Click a ratio</div>
+        <div class="metric" id="metricRatio"></div>
+        <div class="metric" id="metricSkid"></div>
+        <div class="hint" id="hint"></div>
+      </aside>
     </section>
   </main>
 </body>
 </html>
+``
