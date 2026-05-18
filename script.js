@@ -1,139 +1,128 @@
 const chainrings = [42,43,44,45,46,47,48,49,50,51,52,53,54,55];
-const cogs      = [12,13,14,15,16,17,18,19,20,21,22,23]; // includes 12 for your “53×12” example
+const cogs      = [12,13,14,15,16,17,18,19,20,21,22,23];
 
-const grid = document.getElementById("gearGrid");
+const xAxis = document.getElementById("xAxis");
+const yAxis = document.getElementById("yAxis");
+const matrix = document.getElementById("matrix");
 
-let selected = null; // { front, rear, ratio, skid, cellEl }
+let selected = null; // {front, rear, ratio, skid, el}
 
-function gcd(a, b) {
-  return b === 0 ? a : gcd(b, a % b);
+function gcd(a,b){ return b===0 ? a : gcd(b, a%b); }
+function calc(front, rear){
+  return {
+    ratio: (front/rear).toFixed(2),
+    skid: rear / gcd(front, rear)
+  };
 }
 
-function calc(front, rear) {
-  const ratio = (front / rear).toFixed(2);
-  const skid = rear / gcd(front, rear);
-  return { ratio, skid };
-}
+function setSelectedInfo(){
+  const setup = document.getElementById("setup");
+  const rEl = document.getElementById("metricRatio");
+  const sEl = document.getElementById("metricSkid");
 
-function setInfoToSelection() {
-  const setupEl = document.getElementById("setup");
-  const ratioEl = document.getElementById("metricRatio");
-  const skidEl  = document.getElementById("metricSkid");
-
-  if (!selected) {
-    setupEl.textContent = "Click a ratio";
-    ratioEl.textContent = "";
-    skidEl.textContent  = "";
+  if(!selected){
+    setup.textContent = "Click a ratio";
+    rEl.textContent = "";
+    sEl.textContent = "";
     return;
   }
 
-  setupEl.textContent = `${selected.front} × ${selected.rear}`;
-  ratioEl.textContent = `Ratio: ${selected.ratio}`;
-  skidEl.textContent  = `Skid patches: ${selected.skid}`;
+  setup.textContent = `${selected.front} × ${selected.rear}`;
+  rEl.textContent = `Ratio: ${selected.ratio}`;
+  sEl.textContent = `Skid patches: ${selected.skid}`;
 }
 
-function setHoverHint(text) {
-  document.getElementById("hoverHint").textContent = text || "";
+function setHint(text=""){
+  document.getElementById("hint").textContent = text;
 }
 
-function clearHoverHighlights() {
-  grid.querySelectorAll(".hoverHL").forEach(el => el.classList.remove("hoverHL"));
+function clearHover(){
+  document.querySelectorAll(".hoverHL").forEach(n => n.classList.remove("hoverHL"));
 }
 
-function applyHoverHighlights(row, col) {
-  // highlight every cell with same row or same col (includes axis cells too)
-  grid.querySelectorAll(`[data-row="${row}"]`).forEach(el => el.classList.add("hoverHL"));
-  grid.querySelectorAll(`[data-col="${col}"]`).forEach(el => el.classList.add("hoverHL"));
+function applyHover(rowIndex, colIndex){
+  // highlight row + col in matrix
+  matrix.querySelectorAll(`[data-row="${rowIndex}"]`).forEach(n => n.classList.add("hoverHL"));
+  matrix.querySelectorAll(`[data-col="${colIndex}"]`).forEach(n => n.classList.add("hoverHL"));
+
+  // highlight matching axis cells
+  xAxis.querySelector(`[data-col="${colIndex}"]`)?.classList.add("hoverHL");
+  yAxis.querySelector(`[data-row="${rowIndex}"]`)?.classList.add("hoverHL");
 }
 
-// Build grid: 1 header row + N cog rows, 1 axis col + 14 chainring cols
-// Row 0 is header; Col 0 is cog axis
-function buildGrid() {
-  // Row 0: corner + chainring axis
-  addCell("", "cell corner"); // corner (0,0)
-
+function buildAxes(){
+  // X axis cells
   chainrings.forEach((front, j) => {
-    const el = addCell(front, "cell axis");
-    el.dataset.row = "0";
-    el.dataset.col = String(j + 1); // chainring columns start at 1
+    const c = document.createElement("div");
+    c.className = "axisCell";
+    c.textContent = front;
+    c.dataset.col = String(j);
+    xAxis.appendChild(c);
   });
 
-  // Remaining rows: cog axis + ratios
+  // Y axis cells
   cogs.forEach((rear, i) => {
-    const rowIndex = String(i + 1);
+    const c = document.createElement("div");
+    c.className = "axisCell";
+    c.textContent = rear;
+    c.dataset.row = String(i);
+    yAxis.appendChild(c);
+  });
+}
 
-    // Cog axis cell at col 0
-    const axisEl = addCell(rear, "cell axis");
-    axisEl.dataset.row = rowIndex;
-    axisEl.dataset.col = "0";
-
+function buildMatrix(){
+  cogs.forEach((rear, i) => {
     chainrings.forEach((front, j) => {
-      const colIndex = String(j + 1);
       const { ratio, skid } = calc(front, rear);
 
-      const cellEl = addCell(ratio, "cell ratio");
-      cellEl.dataset.row = rowIndex;
-      cellEl.dataset.col = colIndex;
-      cellEl.dataset.front = String(front);
-      cellEl.dataset.rear = String(rear);
-      cellEl.dataset.ratio = ratio;
-      cellEl.dataset.skid = String(skid);
+      const cell = document.createElement("div");
+      cell.className = "mcell";
+      cell.textContent = ratio;
 
-      cellEl.addEventListener("mouseenter", () => {
-        clearHoverHighlights();
-        applyHoverHighlights(rowIndex, colIndex);
+      cell.dataset.row = String(i);
+      cell.dataset.col = String(j);
 
-        // If nothing selected yet, hover drives the info panel (nice onboarding)
-        if (!selected) {
+      cell.addEventListener("mouseenter", () => {
+        clearHover();
+        applyHover(String(i), String(j));
+
+        // Output stays on SELECTED; hover only adds hint
+        if(selected){
+          setHint(`Hovering: ${front} × ${rear}`);
+        } else {
+          // nice onboarding: show hover if nothing selected yet
           document.getElementById("setup").textContent = `${front} × ${rear}`;
           document.getElementById("metricRatio").textContent = `Ratio: ${ratio}`;
-          document.getElementById("metricSkid").textContent  = `Skid patches: ${skid}`;
-          setHoverHint("");
-        } else {
-          // Otherwise: keep selected info, only show hover hint
-          setHoverHint(`Hovering: ${front} × ${rear}`);
+          document.getElementById("metricSkid").textContent = `Skid patches: ${skid}`;
+          setHint("");
         }
       });
 
-      cellEl.addEventListener("mouseleave", () => {
-        clearHoverHighlights();
-        // keep selected info stable
-        if (selected) setHoverHint("");
+      cell.addEventListener("mouseleave", () => {
+        clearHover();
+        if(selected) setHint("");
       });
 
-      cellEl.addEventListener("click", () => {
-        // clear previous selected
-        grid.querySelectorAll(".selected").forEach(el => el.classList.remove("selected"));
+      cell.addEventListener("click", () => {
+        document.querySelectorAll(".selected").forEach(n => n.classList.remove("selected"));
+        cell.classList.add("selected");
 
-        selected = {
-          front,
-          rear,
-          ratio,
-          skid,
-          cellEl
-        };
-
-        cellEl.classList.add("selected");
-        setHoverHint("");
-        setInfoToSelection();
+        selected = { front, rear, ratio, skid, el: cell };
+        setHint("");
+        setSelectedInfo();
       });
+
+      matrix.appendChild(cell);
     });
   });
 
-  // If mouse leaves the whole grid, clear row/col highlighting + hover hint
-  grid.addEventListener("mouseleave", () => {
-    clearHoverHighlights();
-    if (selected) setHoverHint("");
+  // leaving the whole matrix clears hover highlight
+  matrix.addEventListener("mouseleave", () => {
+    clearHover();
+    if(selected) setHint("");
   });
 }
 
-function addCell(text, className) {
-  const el = document.createElement("div");
-  el.className = className;
-  el.textContent = text;
-  grid.appendChild(el);
-  return el;
-}
-
-buildGrid();
-setInfoToSelection();
+buildAxes();
+buildMatrix();
+setSelectedInfo();
