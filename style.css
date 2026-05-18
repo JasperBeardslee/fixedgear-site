@@ -1,0 +1,31 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+#gearTable {
+  display: grid;
+  gap: 2px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(14, 1fr);
+}
+
+.cell {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+  cursor: pointer;
+  background: #f9f9f9;
+}
+
+.cell:hover {
+  background: #cce5ff;
+}
+
+.active {
+  background: #007bff;
+  color: white;
+}
+``
