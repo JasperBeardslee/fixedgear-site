@@ -8,15 +8,14 @@ const matrix = document.getElementById("matrix");
 let selectedRow = null;
 let selectedCol = null;
 
-/* MENU */
+/* ✅ Smooth dropdown */
 function toggleMenu(){
-  document.getElementById("menu").classList.toggle("hidden");
+  document.getElementById("menu").classList.toggle("show");
 }
 
-/* GCD */
 function gcd(a,b){ return b===0 ? a : gcd(b,a%b); }
 
-/* X AXIS (with spacer fix) */
+/* X AXIS */
 let spacer = document.createElement("div");
 spacer.className = "axis";
 xAxis.appendChild(spacer);
@@ -90,9 +89,9 @@ function clearHover(){
   document.querySelectorAll(".cell").forEach(c=>c.classList.remove("hover"));
 }
 
-/* OUTPUT */
+/* output */
 function update(front,rear,ratio,skid){
-  document.querySelector(".selection").textContent=`${front} × ${rear}`;
+  document.getElementById("selection").textContent=`${front} × ${rear}`;
   document.getElementById("ratio").textContent=`Ratio: ${ratio}`;
   document.getElementById("skid").textContent=`Skid patches: ${skid}`;
 }
