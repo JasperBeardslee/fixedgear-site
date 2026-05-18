@@ -1,12 +1,14 @@
 :root{
   --bg:#0b0b10;
+  --table-bg:#1a1a22;
   --purple:#b794f4;
-  --grid:rgba(183,148,244,0.35);
+  --grid:rgba(183,148,244,0.25);
   --hover:rgba(183,148,244,0.18);
   --orange:#f6ad55;
   --cell:44px;
 }
 
+/* PAGE */
 body{
   margin:0;
   background:var(--bg);
@@ -24,10 +26,43 @@ main{
 
 h1{
   color:var(--orange);
-  margin-bottom:25px;
+  font-size:48px; /* bigger title */
+  margin-bottom:30px;
 }
 
-/* Layout */
+/* MENU */
+.menu-button{
+  position:fixed;
+  top:20px;
+  left:20px;
+  font-size:28px;
+  cursor:pointer;
+  color:var(--orange);
+}
+
+.menu{
+  position:fixed;
+  top:60px;
+  left:20px;
+  background:#12121a;
+  border:1px solid var(--purple);
+  border-radius:8px;
+  padding:10px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.menu a{
+  color:#fff;
+  text-decoration:none;
+}
+
+.hidden{
+  display:none;
+}
+
+/* LAYOUT */
 .layout{
   display:flex;
   justify-content:center;
@@ -35,22 +70,21 @@ h1{
   gap:40px;
 }
 
-/* Labels */
+/* LABELS */
 .x-label{
-  font-size:16px;
+  font-size:18px;
   font-weight:bold;
-  margin-bottom:6px;
+  margin-bottom:4px;
 }
 
 .y-label{
   writing-mode:vertical-rl;
   transform:rotate(180deg);
-  font-size:16px;
+  font-size:18px;
   font-weight:bold;
-  margin-right:6px;
+  margin-right:4px;
 }
 
-/* Structure */
 .table-wrap{
   display:flex;
   align-items:center;
@@ -65,18 +99,14 @@ h1{
   display:flex;
 }
 
-/* ✅ FIXED X-AXIS ALIGNMENT */
+/* X AXIS FIXED CENTERING */
 .x-axis{
   display:grid;
   grid-template-columns: var(--cell) repeat(14, var(--cell));
+  justify-content:center;
 }
 
-/* Y axis */
-.y-axis{
-  display:grid;
-}
-
-/* axis cells */
+/* AXIS */
 .axis{
   width:var(--cell);
   height:var(--cell);
@@ -85,8 +115,9 @@ h1{
   align-items:center;
 }
 
-/* MATRIX */
+/* TABLE BACKGROUND */
 .matrix{
+  background:var(--table-bg); /* ✅ dark grey */
   display:grid;
   grid-template-columns:repeat(14, var(--cell));
   border:2px solid var(--purple);
@@ -98,14 +129,14 @@ h1{
   width:var(--cell);
   height:var(--cell);
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
   border-right:1px solid var(--grid);
   border-bottom:1px solid var(--grid);
   cursor:pointer;
 }
 
-/* hover highlight */
+/* hover */
 .hover{
   background:var(--hover);
 }
@@ -116,7 +147,7 @@ h1{
   color:#111;
 }
 
-/* output */
+/* OUTPUT */
 .output{
   border:2px solid var(--purple);
   border-radius:10px;
@@ -128,3 +159,4 @@ h1{
   font-size:20px;
   font-weight:bold;
 }
+``
