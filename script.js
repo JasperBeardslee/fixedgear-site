@@ -8,20 +8,17 @@ const matrix = document.getElementById("matrix");
 let selectedRow = null;
 let selectedCol = null;
 
-/* MENU */
-function toggleMenu(){
-  document.getElementById("menu").classList.toggle("hidden");
+/* GCD */
+function gcd(a,b){
+  return b === 0 ? a : gcd(b, a % b);
 }
 
-/* GCD */
-function gcd(a,b){ return b===0 ? a : gcd(b,a%b); }
-
-/* X AXIS (with spacer fix) */
+/* X AXIS (WITH SPACER FOR ALIGNMENT) */
 let spacer = document.createElement("div");
 spacer.className = "axis";
 xAxis.appendChild(spacer);
 
-chainrings.forEach(c=>{
+chainrings.forEach(c => {
   let el = document.createElement("div");
   el.className = "axis";
   el.textContent = c;
@@ -29,7 +26,7 @@ chainrings.forEach(c=>{
 });
 
 /* Y AXIS */
-cogs.forEach(c=>{
+cogs.forEach(c => {
   let el = document.createElement("div");
   el.className = "axis";
   el.textContent = c;
@@ -37,62 +34,72 @@ cogs.forEach(c=>{
 });
 
 /* MATRIX */
-cogs.forEach((rear,i)=>{
-  chainrings.forEach((front,j)=>{
+cogs.forEach((rear, i) => {
+  chainrings.forEach((front, j) => {
 
-    let ratio = (front/rear).toFixed(2);
-    let skid = rear / gcd(front,rear);
+    let ratio = (front / rear).toFixed(2);
+    let skid = rear / gcd(front, rear);
 
     let cell = document.createElement("div");
     cell.className = "cell";
     cell.textContent = ratio;
 
-    cell.dataset.row=i;
-    cell.dataset.col=j;
+    cell.dataset.row = i;
+    cell.dataset.col = j;
 
-    cell.addEventListener("mouseenter", ()=>{
+    // Hover
+    cell.addEventListener("mouseenter", () => {
       clearHover();
-      highlight(i,j);
+      highlight(i, j);
+
+      if(selectedRow === null){
+        update(front, rear, ratio, skid);
+      }
     });
 
-    cell.addEventListener("mouseleave", ()=>{
+    // Leave
+    cell.addEventListener("mouseleave", () => {
       clearHover();
-      if(selectedRow!==null) highlight(selectedRow,selectedCol);
+
+      if(selectedRow !== null){
+        highlight(selectedRow, selectedCol);
+      }
     });
 
-    cell.addEventListener("click", ()=>{
-      document.querySelectorAll(".selected").forEach(c=>c.classList.remove("selected"));
+    // Click
+    cell.addEventListener("click", () => {
+      document.querySelectorAll(".selected").forEach(c => c.classList.remove("selected"));
       cell.classList.add("selected");
 
-      selectedRow=i;
-      selectedCol=j;
+      selectedRow = i;
+      selectedCol = j;
 
-      update(front,rear,ratio,skid);
+      update(front, rear, ratio, skid);
 
       clearHover();
-      highlight(selectedRow,selectedCol);
+      highlight(selectedRow, selectedCol);
     });
 
     matrix.appendChild(cell);
   });
 });
 
-/* highlight */
-function highlight(row,col){
-  document.querySelectorAll(".cell").forEach(c=>{
-    if(c.dataset.row==row || c.dataset.col==col){
+/* Highlight (matrix only) */
+function highlight(row, col){
+  document.querySelectorAll(".cell").forEach(c => {
+    if(c.dataset.row == row || c.dataset.col == col){
       c.classList.add("hover");
     }
   });
 }
 
 function clearHover(){
-  document.querySelectorAll(".cell").forEach(c=>c.classList.remove("hover"));
+  document.querySelectorAll(".cell").forEach(c => c.classList.remove("hover"));
 }
 
-/* OUTPUT */
-function update(front,rear,ratio,skid){
-  document.querySelector(".selection").textContent=`${front} × ${rear}`;
-  document.getElementById("ratio").textContent=`Ratio: ${ratio}`;
-  document.getElementById("skid").textContent=`Skid patches: ${skid}`;
+/* Output */
+function update(front, rear, ratio, skid){
+  document.querySelector(".selection").textContent = `${front} × ${rear}`;
+  document.getElementById("ratio").textContent = `Ratio: ${ratio}`;
+  document.getElementById("skid").textContent = `Skid patches: ${skid}`;
 }
