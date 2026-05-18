@@ -1,6 +1,6 @@
 :root{
   --bg:#0b0b10;
-  --table-bg:#1c1c26;
+  --table:#1c1c26;
   --purple:#b794f4;
   --grid:rgba(183,148,244,0.25);
   --hover:rgba(183,148,244,0.18);
@@ -8,24 +8,14 @@
   --cell:44px;
 }
 
-/* ✅ Smooth wave background */
+/* PAGE */
 body{
   margin:0;
+  background:var(--bg);
   color:#f5f5f5;
   font-family:-apple-system, BlinkMacSystemFont, sans-serif;
-
-  background: linear-gradient(-45deg, #07070a, #111118, #07070a, #151522);
-  background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite;
-
   display:flex;
   justify-content:center;
-}
-
-@keyframes gradientShift{
-  0%{ background-position: 0% 50%; }
-  50%{ background-position: 100% 50%; }
-  100%{ background-position: 0% 50%; }
 }
 
 main{
@@ -36,7 +26,7 @@ main{
 
 h1{
   color:var(--orange);
-  font-size:52px;
+  font-size:50px;
   margin-bottom:30px;
 }
 
@@ -65,7 +55,7 @@ h1{
   opacity:0;
   transform:translateY(-10px);
   pointer-events:none;
-  transition:0.3s ease;
+  transition:0.25s ease;
 }
 
 .menu.show{
@@ -79,7 +69,7 @@ h1{
   text-decoration:none;
 }
 
-/* Layout */
+/* LAYOUT */
 .layout{
   display:flex;
   justify-content:center;
@@ -87,11 +77,11 @@ h1{
   gap:50px;
 }
 
-/* Labels */
+/* LABELS */
 .x-label{
   font-size:18px;
   font-weight:bold;
-  margin-bottom:4px;
+  margin-bottom:5px;
 }
 
 .y-label{
@@ -99,10 +89,10 @@ h1{
   transform:rotate(180deg);
   font-size:18px;
   font-weight:bold;
-  margin-right:4px;
+  margin-right:5px;
 }
 
-/* Table */
+/* TABLE */
 .table-wrap{
   display:flex;
   align-items:center;
@@ -117,12 +107,13 @@ h1{
   display:flex;
 }
 
+/* X AXIS FIX */
 .x-axis{
   display:grid;
   grid-template-columns: var(--cell) repeat(14, var(--cell));
-  justify-content:center;
 }
 
+/* AXIS */
 .axis{
   width:var(--cell);
   height:var(--cell);
@@ -131,8 +122,9 @@ h1{
   align-items:center;
 }
 
+/* MATRIX */
 .matrix{
-  background:var(--table-bg);
+  background:var(--table);
   display:grid;
   grid-template-columns:repeat(14, var(--cell));
   border:2px solid var(--purple);
@@ -144,14 +136,14 @@ h1{
   width:var(--cell);
   height:var(--cell);
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   border-right:1px solid var(--grid);
   border-bottom:1px solid var(--grid);
   cursor:pointer;
 }
 
-/* Interaction */
+/* INTERACTION */
 .hover{
   background:var(--hover);
 }
@@ -161,12 +153,12 @@ h1{
   color:#111;
 }
 
-/* ✅ Premium output card */
+/* PREMIUM OUTPUT */
 .output{
+  width:240px;
+  padding:25px;
   border:2px solid var(--purple);
   border-radius:12px;
-  padding:25px;
-  width:240px;
   background:rgba(255,255,255,0.03);
 
   box-shadow:
@@ -174,25 +166,19 @@ h1{
     inset 0 0 20px rgba(183,148,244,0.1);
 }
 
-.output-main{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
-/* BIG gear display */
 .gear{
   font-size:28px;
   font-weight:800;
   color:var(--orange);
+  margin-bottom:10px;
 }
 
-/* Ratio is hero */
 .ratio{
   font-size:22px;
+  margin-bottom:5px;
 }
 
 .skid{
   font-size:16px;
-  opacity:0.9;
 }
+``
