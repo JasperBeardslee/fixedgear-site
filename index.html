@@ -9,11 +9,13 @@
 <body>
 
 <!-- MENU BUTTON -->
-<div class="menu-button" onclick="toggleMenu()">☰</div>
+<div class="menu-button" onclick="toggleMenu()">
+  ☰
+</div>
 
-<!-- MENU -->
-<div id="menu" class="menu">
-  #Calculator Homepage</a>
+<!-- DROPDOWN MENU -->
+<div id="menu" class="menu hidden">
+  #Calculator Home</a>
   #Fixed Gear Resources</a>
   #Blog</a>
 </div>
@@ -25,33 +27,35 @@
 
     <!-- TABLE -->
     <div class="table-container">
+
       <div class="x-label">Chainring Teeth</div>
 
       <div class="table-wrap">
         <div class="y-label">Cog Teeth</div>
 
         <div class="table-core">
+
           <div id="xAxis" class="x-axis"></div>
 
           <div class="body">
             <div id="yAxis"></div>
             <div id="matrix" class="matrix"></div>
           </div>
+
         </div>
       </div>
     </div>
 
     <!-- OUTPUT -->
     <div class="output">
-      <div class="gear" id="selection">–</div>
-      <div class="ratio" id="ratio"></div>
-      <div class="skid" id="skid"></div>
+      <p class="selection">Click a ratio</p>
+      <p id="ratio"></p>
+      <p id="skid"></p>
     </div>
 
   </div>
 </main>
 
-<script src="script.js"></script>
+script.jsscript>
 </body>
 </html>
-``
