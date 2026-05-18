@@ -5,21 +5,26 @@ const xAxis = document.getElementById("xAxis");
 const yAxis = document.getElementById("yAxis");
 const matrix = document.getElementById("matrix");
 
-let selected = null;
 let selectedRow = null;
 let selectedCol = null;
+let selected = null;
 
 function gcd(a,b){ return b===0 ? a : gcd(b,a%b); }
 
-/* AXES */
-chainrings.forEach((c, j) => {
+/* ✅ X AXIS (WITH SPACER FIX) */
+let spacer = document.createElement("div");
+spacer.className = "axis";
+xAxis.appendChild(spacer);
+
+chainrings.forEach((c) => {
   let el = document.createElement("div");
   el.className = "axis";
   el.textContent = c;
   xAxis.appendChild(el);
 });
 
-cogs.forEach((c, i) => {
+/* Y AXIS */
+cogs.forEach((c) => {
   let el = document.createElement("div");
   el.className = "axis";
   el.textContent = c;
@@ -30,7 +35,7 @@ cogs.forEach((c, i) => {
 cogs.forEach((rear, i) => {
   chainrings.forEach((front, j) => {
 
-    let ratio = (front/rear).toFixed(2);
+    let ratio = (front / rear).toFixed(2);
     let skid = rear / gcd(front, rear);
 
     let cell = document.createElement("div");
@@ -43,10 +48,19 @@ cogs.forEach((rear, i) => {
     /* hover */
     cell.addEventListener("mouseenter", () => {
       clearHover();
-      highlight(i, j);
+      applyHighlight(i, j);
 
       if(!selected){
         updateOutput(front, rear, ratio, skid);
+      }
+    });
+
+    /* ✅ FIX: restore selection after hover */
+    cell.addEventListener("mouseleave", () => {
+      clearHover();
+
+      if(selectedRow !== null){
+        applyHighlight(selectedRow, selectedCol);
       }
     });
 
@@ -61,7 +75,7 @@ cogs.forEach((rear, i) => {
       selectedCol = j;
 
       clearHover();
-      highlight(selectedRow, selectedCol);
+      applyHighlight(selectedRow, selectedCol);
 
       updateOutput(front, rear, ratio, skid);
     });
@@ -70,8 +84,8 @@ cogs.forEach((rear, i) => {
   });
 });
 
-/* highlight logic (matrix only — no axis bleed) */
-function highlight(row, col){
+/* highlight (matrix only) */
+function applyHighlight(row, col){
   document.querySelectorAll(".cell").forEach(c => {
     if(c.dataset.row == row || c.dataset.col == col){
       c.classList.add("hover");
@@ -89,3 +103,4 @@ function updateOutput(front, rear, ratio, skid){
   document.getElementById("ratio").textContent = `Ratio: ${ratio}`;
   document.getElementById("skid").textContent = `Skid patches: ${skid}`;
 }
+``
