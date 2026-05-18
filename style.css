@@ -7,7 +7,6 @@
   --cell:44px;
 }
 
-/* Page */
 body{
   margin:0;
   background:var(--bg);
@@ -51,7 +50,7 @@ h1{
   margin-right:6px;
 }
 
-/* Table structure */
+/* Structure */
 .table-wrap{
   display:flex;
   align-items:center;
@@ -66,15 +65,18 @@ h1{
   display:flex;
 }
 
+/* ✅ FIXED X-AXIS ALIGNMENT */
 .x-axis{
   display:grid;
-  grid-template-columns:repeat(14, var(--cell));
+  grid-template-columns: var(--cell) repeat(14, var(--cell));
 }
 
+/* Y axis */
 .y-axis{
   display:grid;
 }
 
+/* axis cells */
 .axis{
   width:var(--cell);
   height:var(--cell);
@@ -83,7 +85,7 @@ h1{
   align-items:center;
 }
 
-/* Matrix */
+/* MATRIX */
 .matrix{
   display:grid;
   grid-template-columns:repeat(14, var(--cell));
@@ -114,7 +116,7 @@ h1{
   color:#111;
 }
 
-/* Output panel */
+/* output */
 .output{
   border:2px solid var(--purple);
   border-radius:10px;
