@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Fixed Gear Ratio Calculator</title>
-  <link rel="stylesheet" href="style.css">
+  style.css
 </head>
 
 <body>
@@ -13,9 +13,9 @@
   ☰
 </div>
 
-<!-- DROPDOWN MENU -->
-<div id="menu" class="menu hidden">
-  <a href="#">Calculator Home</a>
+<!-- MENU -->
+<div id="menu" class="menu">
+  <a href="#">Calculator Homepage</a>
   <a href="#">Fixed Gear Resources</a>
   <a href="#">Blog</a>
 </div>
@@ -27,35 +27,34 @@
 
     <!-- TABLE -->
     <div class="table-container">
-
       <div class="x-label">Chainring Teeth</div>
 
       <div class="table-wrap">
         <div class="y-label">Cog Teeth</div>
 
         <div class="table-core">
-
           <div id="xAxis" class="x-axis"></div>
 
           <div class="body">
             <div id="yAxis"></div>
             <div id="matrix" class="matrix"></div>
           </div>
-
         </div>
       </div>
     </div>
 
-    <!-- OUTPUT -->
+    <!-- OUTPUT (premium) -->
     <div class="output">
-      <p class="selection">Click a ratio</p>
-      <p id="ratio"></p>
-      <p id="skid"></p>
+      <div class="output-main">
+        <div class="gear" id="selection">–</div>
+        <div class="ratio" id="ratio"></div>
+        <div class="skid" id="skid"></div>
+      </div>
     </div>
 
   </div>
 </main>
 
-<script src="script.js"></script>
+script.jsscript>
 </body>
 </html>
