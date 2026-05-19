@@ -8,11 +8,12 @@
   --cell:44px;
 }
 
+/* ✅ DEFAULT FONT */
 body{
   margin:0;
   background:var(--bg);
   color:#f5f5f5;
-  font-family:-apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 /* ✅ BANNER */
@@ -25,20 +26,21 @@ body{
   border-bottom:1px solid rgba(255,255,255,0.08);
 }
 
-/* ✅ TITLE STYLE */
+/* ✅ TITLE FONT */
 .brand{
+  font-family: 'Space Grotesk', sans-serif;
   font-size:22px;
-  font-weight:700;
+  font-weight:600;
   color:white;
-  text-shadow:0 0 6px rgba(183,148,244,0.6);
+  text-shadow:0 0 6px rgba(183,148,244,0.5);
 }
 
-/* ✅ NAV */
+/* ✅ NAV FONT */
 .nav{
+  font-family: 'Space Grotesk', sans-serif;
   display:flex;
   gap:20px;
   font-size:14px;
-  opacity:0.9;
 }
 
 /* PAGE */
@@ -48,7 +50,6 @@ main{
   padding:40px 0;
 }
 
-/* LAYOUT */
 .layout{
   display:flex;
   align-items:center;
@@ -58,19 +59,20 @@ main{
 /* LABELS */
 .x-label{
   font-size:18px;
-  font-weight:bold;
-  margin-bottom:6px;
+  font-weight:600;
   text-align:center;
+  margin-bottom:6px;
 }
 
 .y-label{
   writing-mode:vertical-rl;
   transform:rotate(180deg);
   font-size:18px;
-  font-weight:bold;
+  font-weight:600;
   margin-right:6px;
 }
 
+/* TABLE */
 .table-wrap{
   display:flex;
   align-items:center;
@@ -85,20 +87,18 @@ main{
   display:flex;
 }
 
-/* ✅ X AXIS PERFECT CENTERING */
+/* X AXIS */
 .x-axis{
   display:grid;
   grid-template-columns: var(--cell) repeat(14, var(--cell));
-  justify-content:center;
 }
 
-/* AXIS */
 .axis{
   width:var(--cell);
   height:var(--cell);
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
 }
 
 /* MATRIX */
@@ -115,8 +115,8 @@ main{
   width:var(--cell);
   height:var(--cell);
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
   border-right:1px solid var(--grid);
   border-bottom:1px solid var(--grid);
 }
@@ -131,17 +131,15 @@ main{
   color:#111;
 }
 
-/* ✅ OUTPUT */
+/* OUTPUT */
 .output-container{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:8px;
+  text-align:center;
 }
 
 .output-title{
   font-size:14px;
   opacity:0.7;
+  margin-bottom:6px;
 }
 
 .output-box{
@@ -149,21 +147,9 @@ main{
   border-radius:10px;
   padding:12px 16px;
   min-width:160px;
-  text-align:center;
 }
 
-/* tighter + smaller */
 .selection{
   font-size:18px;
-  font-weight:bold;
+  font-weight:600;
 }
-
-#ratio{
-  font-size:15px;
-}
-
-#skid{
-  font-size:14px;
-  opacity:0.9;
-}
-``
