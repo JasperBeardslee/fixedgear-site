@@ -8,12 +8,11 @@
   --cell:44px;
 }
 
-/* ✅ DEFAULT FONT */
 body{
   margin:0;
   background:var(--bg);
   color:#f5f5f5;
-  font-family: 'Montserrat', sans-serif;
+  font-family:'Montserrat', sans-serif;
 }
 
 /* ✅ BANNER */
@@ -21,26 +20,29 @@ body{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:16px 30px;
+  padding:18px 40px;
   background:#06060a;
   border-bottom:1px solid rgba(255,255,255,0.08);
 }
 
-/* ✅ TITLE FONT */
+/* ✅ BIG TITLE */
 .brand{
-  font-family: 'Space Grotesk', sans-serif;
-  font-size:22px;
-  font-weight:600;
+  font-family:'Space Grotesk', sans-serif;
+  font-size:34px;
+  font-weight:700;
   color:white;
-  text-shadow:0 0 6px rgba(183,148,244,0.5);
+  letter-spacing:1px;
+
+  /* purple outline */
+  -webkit-text-stroke: 1px rgba(183,148,244,0.6);
+  text-shadow: 0 0 6px rgba(183,148,244,0.4);
 }
 
-/* ✅ NAV FONT */
 .nav{
-  font-family: 'Space Grotesk', sans-serif;
+  font-family:'Space Grotesk', sans-serif;
   display:flex;
-  gap:20px;
-  font-size:14px;
+  gap:24px;
+  font-size:15px;
 }
 
 /* PAGE */
@@ -56,14 +58,19 @@ main{
   gap:50px;
 }
 
-/* LABELS */
+/* ✅ LABEL */
 .x-label{
   font-size:18px;
   font-weight:600;
+  margin-bottom:10px;
+
+  /* ✅ TRUE CENTER FIX */
+  margin-left: calc(var(--cell));
+  width: calc(14 * var(--cell));
   text-align:center;
-  margin-bottom:6px;
 }
 
+/* Y axis */
 .y-label{
   writing-mode:vertical-rl;
   transform:rotate(180deg);
@@ -87,12 +94,13 @@ main{
   display:flex;
 }
 
-/* X AXIS */
+/* axis */
 .x-axis{
   display:grid;
   grid-template-columns: var(--cell) repeat(14, var(--cell));
 }
 
+/* cells */
 .axis{
   width:var(--cell);
   height:var(--cell);
@@ -101,7 +109,7 @@ main{
   justify-content:center;
 }
 
-/* MATRIX */
+/* matrix */
 .matrix{
   background:var(--table);
   display:grid;
@@ -121,7 +129,7 @@ main{
   border-bottom:1px solid var(--grid);
 }
 
-/* INTERACTION */
+/* interactions */
 .hover{
   background:var(--hover);
 }
