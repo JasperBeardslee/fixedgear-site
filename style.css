@@ -1,5 +1,6 @@
 :root{
-  --bg:#0b0b10;
+  --bg:#1a1a22;        /* ✅ lighter gray main background */
+  --banner:#06060a;    /* ✅ darker top bar */
   --table:#1c1c26;
   --purple:#b794f4;
   --grid:rgba(183,148,244,0.25);
@@ -8,6 +9,7 @@
   --cell:44px;
 }
 
+/* PAGE */
 body{
   margin:0;
   background:var(--bg);
@@ -15,17 +17,17 @@ body{
   font-family:'Montserrat', sans-serif;
 }
 
-/* ✅ BANNER */
+/* ✅ BANNER (strong separation) */
 .banner{
   display:flex;
   justify-content:space-between;
   align-items:center;
   padding:18px 40px;
-  background:#06060a;
-  border-bottom:1px solid rgba(255,255,255,0.08);
+  background:var(--banner);
+  border-bottom:1px solid rgba(183,148,244,0.25);
 }
 
-/* ✅ BIG TITLE */
+/* ✅ MAIN TITLE (unchanged but strong) */
 .brand{
   font-family:'Space Grotesk', sans-serif;
   font-size:34px;
@@ -33,16 +35,27 @@ body{
   color:white;
   letter-spacing:1px;
 
-  /* purple outline */
   -webkit-text-stroke: 1px rgba(183,148,244,0.6);
   text-shadow: 0 0 6px rgba(183,148,244,0.4);
 }
 
+/* ✅ NAV — same style, smaller */
 .nav{
   font-family:'Space Grotesk', sans-serif;
   display:flex;
   gap:24px;
-  font-size:15px;
+  font-size:16px;
+  font-weight:600;
+}
+
+.nav span{
+  color:white;
+  letter-spacing:1px;
+
+  -webkit-text-stroke: 0.6px rgba(183,148,244,0.5);
+  text-shadow: 0 0 4px rgba(183,148,244,0.3);
+
+  cursor:pointer;
 }
 
 /* PAGE */
@@ -58,19 +71,17 @@ main{
   gap:50px;
 }
 
-/* ✅ LABEL */
+/* ✅ LABEL CENTER FIX */
 .x-label{
   font-size:18px;
   font-weight:600;
   margin-bottom:10px;
 
-  /* ✅ TRUE CENTER FIX */
   margin-left: calc(var(--cell));
   width: calc(14 * var(--cell));
   text-align:center;
 }
 
-/* Y axis */
 .y-label{
   writing-mode:vertical-rl;
   transform:rotate(180deg);
@@ -94,22 +105,19 @@ main{
   display:flex;
 }
 
-/* axis */
 .x-axis{
   display:grid;
   grid-template-columns: var(--cell) repeat(14, var(--cell));
 }
 
-/* cells */
 .axis{
   width:var(--cell);
   height:var(--cell);
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
 }
 
-/* matrix */
 .matrix{
   background:var(--table);
   display:grid;
@@ -123,13 +131,12 @@ main{
   width:var(--cell);
   height:var(--cell);
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   border-right:1px solid var(--grid);
   border-bottom:1px solid var(--grid);
 }
 
-/* interactions */
 .hover{
   background:var(--hover);
 }
@@ -153,11 +160,12 @@ main{
 .output-box{
   border:2px solid var(--purple);
   border-radius:10px;
-  padding:12px 16px;
-  min-width:160px;
+  padding:10px 14px;
+  min-width:140px;
 }
 
 .selection{
   font-size:18px;
   font-weight:600;
 }
+``
