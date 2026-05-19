@@ -1,37 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Fixed Gear Ratio Calculator</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- ✅ FIXED FONT LOAD -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css" />
+  <!-- ✅ FIXED CSS LOAD -->
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header class="banner">
+<div class="banner">
   <div class="brand">FIXED GEAR RATIO CALCULATOR</div>
   <div class="nav">
     <span>FIXIE BUILD INSPIRATION</span>
     <span>BLOG</span>
     <span>SHOP</span>
   </div>
-</header>
+</div>
 
 <main>
   <div class="layout">
 
+    <!-- TABLE -->
     <div class="table-container">
+
+      <div class="x-label">Chainring Teeth</div>
 
       <div class="table-wrap">
         <div class="y-label">Cog Teeth</div>
 
         <div class="table-core">
-          <div class="x-label">Chainring Teeth</div>
 
           <div id="xAxis" class="x-axis"></div>
 
@@ -39,11 +41,12 @@
             <div id="yAxis" class="y-axis"></div>
             <div id="matrix" class="matrix"></div>
           </div>
+
         </div>
       </div>
-
     </div>
 
+    <!-- OUTPUT -->
     <div class="output-container">
       <div class="output-title">My Ratio</div>
       <div class="output-box">
@@ -56,6 +59,8 @@
   </div>
 </main>
 
+<!-- ✅ FIXED JS LOAD -->
 <script src="script.js"></script>
+
 </body>
 </html>
