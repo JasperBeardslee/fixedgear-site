@@ -2,45 +2,44 @@
   --bg:#1a1a22;
   --banner:#06060a;
   --table:#1c1c26;
+
   --purple:#b794f4;
   --grid:rgba(183,148,244,0.25);
   --hover:rgba(183,148,244,0.18);
   --orange:#f6ad55;
+
   --cell:44px;
+  --radius:10px;
 }
 
-/* ✅ FIX: overlay no longer breaks clicks/layout */
+/* Background pattern */
 body{
   margin:0;
-  background-color:var(--bg);
-
-  background-image: url("./assets/bikepattern.jpg");
-  background-repeat: repeat;
-  background-size: 200px;
-
   font-family:'Montserrat', sans-serif;
   color:#f5f5f5;
+
+  background-color:var(--bg);
+  background-image:url("./assets/bikepattern.jpg");
+  background-repeat:repeat;
+  background-size:200px;
 }
 
-/* ✅ KEY FIX: allow clicks + prevent layout bug */
+/* Subtle overlay (does NOT block clicks) */
 body::before{
   content:"";
   position:fixed;
   inset:0;
-
-  background: rgba(20,20,26,0.92);
-
-  pointer-events: none;   /* ✅ THIS FIXES CLICK BUG */
+  background:rgba(20,20,26,0.92);
+  pointer-events:none;
   z-index:0;
 }
 
-/* ✅ ensure content sits above overlay */
-main, .banner{
+.banner, .main{
   position:relative;
   z-index:1;
 }
 
-/* BANNER */
+/* Banner */
 .banner{
   display:flex;
   justify-content:space-between;
@@ -50,19 +49,17 @@ main, .banner{
   border-bottom:1px solid rgba(183,148,244,0.25);
 }
 
-/* TITLE */
 .brand{
   font-family:'Space Grotesk', sans-serif;
   font-size:34px;
   font-weight:700;
-  color:white;
+  color:#fff;
   letter-spacing:1px;
 
-  -webkit-text-stroke: 1px rgba(183,148,244,0.6);
-  text-shadow: 0 0 6px rgba(183,148,244,0.4);
+  -webkit-text-stroke:1px rgba(183,148,244,0.6);
+  text-shadow:0 0 6px rgba(183,148,244,0.4);
 }
 
-/* NAV */
 .nav{
   font-family:'Space Grotesk', sans-serif;
   display:flex;
@@ -72,13 +69,13 @@ main, .banner{
 }
 
 .nav span{
-  color:white;
-  -webkit-text-stroke: 0.6px rgba(183,148,244,0.5);
-  text-shadow: 0 0 4px rgba(183,148,244,0.3);
+  color:#fff;
+  -webkit-text-stroke:0.6px rgba(183,148,244,0.5);
+  text-shadow:0 0 4px rgba(183,148,244,0.3);
 }
 
-/* MAIN */
-main{
+/* Main layout */
+.main{
   display:flex;
   justify-content:center;
   padding:40px 0;
@@ -90,108 +87,141 @@ main{
   gap:50px;
 }
 
-/* ✅ FIX: correct centering */
-.x-label{
-  font-size:18px;
-  font-weight:600;
-  margin-bottom:10px;
-
-  margin-left: calc(var(--cell));
-  width: calc(14 * var(--cell));
-  text-align:center;
+/* Table wrap */
+.table-wrap{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-/* Y */
 .y-label{
   writing-mode:vertical-rl;
   transform:rotate(180deg);
   font-size:18px;
   font-weight:600;
-  margin-right:6px;
 }
 
-/* TABLE */
-.table-wrap{
-  display:flex;
-  align-items:center;
-}
-
-.table-core{
-  display:flex;
-  flex-direction:column;
-}
-
-.body{
-  display:flex;
-}
-
-.x-axis{
+/*
+  Grid layout:
+  columns: [y-axis] + 14 ratio columns
+  rows:    [label] [x-axis] + 12 ratio rows
+*/
+.table-grid{
   display:grid;
   grid-template-columns: var(--cell) repeat(14, var(--cell));
+  grid-template-rows: auto var(--cell) repeat(12, var(--cell));
+  gap:0;
 }
 
+/* Chainring label spans ratio columns only (col 2..15) */
+.x-label{
+  grid-column: 2 / span 14;
+  grid-row: 1;
+  text-align:center;
+  font-size:18px;
+  font-weight:600;
+  margin-bottom:10px;
+}
+
+/* Blank corner in row 2 col 1 */
+.corner{
+  grid-column:1;
+  grid-row:2;
+  width:var(--cell);
+  height:var(--cell);
+}
+
+/* X axis row 2 col 2..15 */
+.x-axis{
+  grid-column:2 / span 14;
+  grid-row:2;
+  display:grid;
+  grid-template-columns: repeat(14, var(--cell));
+}
+
+/* Y axis rows 3..14 col 1 */
+.y-axis{
+  grid-column:1;
+  grid-row:3 / span 12;
+  display:grid;
+  grid-template-rows: repeat(12, var(--cell));
+}
+
+/* Matrix rows 3..14 col 2..15 */
+.matrix{
+  grid-column:2 / span 14;
+  grid-row:3 / span 12;
+
+  display:grid;
+  grid-template-columns: repeat(14, var(--cell));
+  grid-template-rows: repeat(12, var(--cell));
+
+  background:var(--table);
+  border:2px solid var(--purple);
+  border-radius:var(--radius);
+  overflow:hidden;
+}
+
+/* Axis cells */
 .axis{
   width:var(--cell);
   height:var(--cell);
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
+  box-sizing:border-box;
 }
 
-.matrix{
-  background:var(--table);
-  display:grid;
-  grid-template-columns:repeat(14, var(--cell));
-  border:2px solid var(--purple);
-  border-radius:10px;
-  overflow:hidden;
-}
-
-/* ✅ FIX: prevent jump */
+/* Ratio cells */
 .cell{
   width:var(--cell);
   height:var(--cell);
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
 
   border-right:1px solid var(--grid);
   border-bottom:1px solid var(--grid);
 
   cursor:pointer;
-  box-sizing:border-box; /* ✅ prevents resize shift */
+  user-select:none;
+
+  box-sizing:border-box;     /* prevents jump/reflow */
+  line-height:1;             /* prevents font metric wobble */
 }
 
-/* ✅ highlight works again */
+/* Row/col highlight */
 .hover{
   background:var(--hover);
 }
 
+/* ✅ Selected MUST win over hover */
 .selected{
-  background:var(--orange);
-  color:#111;
+  background:var(--orange) !important;
+  color:#111 !important;
 }
 
-/* ✅ OUTPUT FIX (border restored) */
+/* Output */
 .output-container{
   text-align:center;
 }
 
 .output-title{
   font-size:14px;
-  opacity:0.7;
+  opacity:0.8;
   margin-bottom:6px;
 }
 
 .output-box{
-  border:2px solid var(--purple);  /* ✅ restored */
-  border-radius:10px;
+  border:2px solid var(--purple);     /* purple outline restored */
+  border-radius:var(--radius);
   padding:10px 14px;
   min-width:140px;
-  background: rgba(0,0,0,0.15);    /* keeps it visible */
+  background:rgba(0,0,0,0.15);
 }
 
 .selection{
   font-size:18px;
   font-weight:600;
 }
+``
