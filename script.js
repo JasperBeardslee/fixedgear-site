@@ -12,7 +12,6 @@ function gcd(a,b){
   return b===0 ? a : gcd(b,a%b);
 }
 
-/* X AXIS */
 let spacer = document.createElement("div");
 spacer.className = "axis";
 xAxis.appendChild(spacer);
@@ -24,7 +23,6 @@ chainrings.forEach(c=>{
   xAxis.appendChild(el);
 });
 
-/* Y AXIS */
 cogs.forEach(c=>{
   let el=document.createElement("div");
   el.className="axis";
@@ -32,7 +30,6 @@ cogs.forEach(c=>{
   yAxis.appendChild(el);
 });
 
-/* MATRIX */
 cogs.forEach((rear,i)=>{
   chainrings.forEach((front,j)=>{
 
@@ -75,7 +72,6 @@ cogs.forEach((rear,i)=>{
   });
 });
 
-/* highlight */
 function highlight(row,col){
   document.querySelectorAll(".cell").forEach(c=>{
     if(c.dataset.row==row || c.dataset.col==col){
