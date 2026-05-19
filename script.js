@@ -8,12 +8,11 @@ const matrix = document.getElementById("matrix");
 let selectedRow = null;
 let selectedCol = null;
 
-/* GCD */
 function gcd(a,b){
   return b === 0 ? a : gcd(b, a % b);
 }
 
-/* X AXIS (WITH SPACER FOR ALIGNMENT) */
+/* X AXIS */
 let spacer = document.createElement("div");
 spacer.className = "axis";
 xAxis.appendChild(spacer);
@@ -47,26 +46,18 @@ cogs.forEach((rear, i) => {
     cell.dataset.row = i;
     cell.dataset.col = j;
 
-    // Hover
     cell.addEventListener("mouseenter", () => {
       clearHover();
       highlight(i, j);
-
-      if(selectedRow === null){
-        update(front, rear, ratio, skid);
-      }
     });
 
-    // Leave
     cell.addEventListener("mouseleave", () => {
       clearHover();
-
       if(selectedRow !== null){
         highlight(selectedRow, selectedCol);
       }
     });
 
-    // Click
     cell.addEventListener("click", () => {
       document.querySelectorAll(".selected").forEach(c => c.classList.remove("selected"));
       cell.classList.add("selected");
@@ -84,7 +75,7 @@ cogs.forEach((rear, i) => {
   });
 });
 
-/* Highlight (matrix only) */
+/* highlight */
 function highlight(row, col){
   document.querySelectorAll(".cell").forEach(c => {
     if(c.dataset.row == row || c.dataset.col == col){
@@ -97,7 +88,7 @@ function clearHover(){
   document.querySelectorAll(".cell").forEach(c => c.classList.remove("hover"));
 }
 
-/* Output */
+/* output */
 function update(front, rear, ratio, skid){
   document.querySelector(".selection").textContent = `${front} × ${rear}`;
   document.getElementById("ratio").textContent = `Ratio: ${ratio}`;
