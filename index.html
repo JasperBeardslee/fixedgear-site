@@ -60,6 +60,30 @@
           <div class="selection">–</div>
           <div id="ratio"></div>
           <div id="skid"></div>
+          <div id="gearInches"></div>
+        </div>
+
+        <div class="controls">
+          <label class="control-label">Wheel Size
+            <select id="wheelSize">
+              <option value="27.0">700c (27.0")</option>
+              <option value="25.6">650b (25.6")</option>
+              <option value="26.0">26" MTB</option>
+            </select>
+          </label>
+
+          <label class="control-label">
+            <span>Cadence: <span id="cadenceVal">90</span> RPM</span>
+            <input type="range" id="cadence" min="60" max="130" value="90" step="1">
+          </label>
+
+          <div class="speed-row">
+            <div id="speed" class="speed-display">–</div>
+            <div class="unit-toggle">
+              <button id="btnMph" class="unit-btn active">mph</button>
+              <button id="btnKph" class="unit-btn">km/h</button>
+            </div>
+          </div>
         </div>
       </aside>
 
