@@ -102,7 +102,7 @@ function updateOutput(){
   document.getElementById("gearInches").textContent = `Gear inches: ${gearInches.toFixed(1)}"`;
   document.getElementById("speed").textContent       = useImperial
     ? `${speedMph.toFixed(1)} mph`
-    : `${speedKmh.toFixed(1)} km/h`;
+    : `${speedKmh.toFixed(1)} kph`;
 }
 
 /* ── Controls ── */
