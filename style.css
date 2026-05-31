@@ -177,6 +177,7 @@ body::before{
   align-items:center;
   justify-content:center;
   box-sizing:border-box;
+  font-weight:700;
 }
 
 /* Ratio cells */
@@ -211,6 +212,7 @@ body::before{
 /* Output */
 .output-container{
   text-align:center;
+  width:204px;
 }
 
 .output-title{
@@ -222,7 +224,8 @@ body::before{
 .output-box{
   border:2px solid var(--purple);
   border-radius:var(--radius);
-  width:200px;
+  width:100%;
+  box-sizing:border-box;
   padding:18px 14px;
   display:flex;
   flex-direction:column;
@@ -245,7 +248,8 @@ body::before{
 /* Controls below output box */
 .controls{
   margin-top:18px;
-  width:200px;
+  width:100%;
+  box-sizing:border-box;
   border:2px solid var(--purple);
   border-radius:var(--radius);
   overflow:hidden;
